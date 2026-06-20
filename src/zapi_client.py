@@ -32,10 +32,10 @@ class ZapiClient:
                 self._base_url, json=payload, headers=self._headers, timeout=15
             )
         except requests.RequestException as exc:
-            raise ZApiError(f"erro ao enviar mensagem para {telefone}: {exc}") from exc
+            raise ZapiError(f"erro ao enviar mensagem para {telefone}: {exc}") from exc
 
         if response.status_code >= 400:
-           raise ZApiError(
+           raise ZapiError(
                 f"Z-API retornou erro {response.status_code} para {telefone}: {response.text}"
             )
 
