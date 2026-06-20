@@ -18,9 +18,9 @@ class SupabaseContatoRepository:
     def __init__(self, settings: Settings):
         self.client: Client = create_client(settings.supabase_url, settings.supabase_key)
 
-    def get_contatos(self,limite:int) -> List[Contato]:
+    def get_contatos(self, limite: int) -> List[Contato]:
         """retorna até o 'limite' contatos cadastrados no supabase (ordenados por data de criação)"""
-        logger.info(f"buscando até {limite}contato(s) no supabase", limite)
+        logger.info(f"Buscando até {limite} contato(s) no Supabase...")
 
         response = (
             self.client.table(self.TABLE_NAME)
@@ -31,5 +31,5 @@ class SupabaseContatoRepository:
         )
 
         contatos = [Contato.from_dict(row) for row in response.data]
-        logger.info(f"encontrado(s) {len(contatos)} contato(s) no supabase", len(contatos))
+        logger.info(f"Encontrado(s) {len(contatos)} contato(s) no Supabase.")
         return contatos

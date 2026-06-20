@@ -13,7 +13,7 @@ class ZapiError(Exception):
 class ZapiClient:
     """envia msg via Z-API"""
     def __init__(self,settings: Settings):
-        self.base_url = (
+        self._base_url = (
             f"https://api.z-api.io/instances/{settings.zapi_instance_id}"
             f"/token/{settings.zapi_token}/send-text"
         )

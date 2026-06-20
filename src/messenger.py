@@ -7,18 +7,18 @@ from typing import List
 from src.config import Settings
 from src.models import Contato
 from src.supabase_client import SupabaseContatoRepository
-from src.zapi_client import ZApiClient, ZApiError
+from src.zapi_client import ZapiClient, ZapiError
 
 logger = logging.getLogger(__name__)
 
-MENSAGEM_TEMPLATE = "Oii {nome_contato}, tudo bem?"
+MENSAGEM_TEMPLATE = "Olá, {nome_contato} tudo bem com você?"
 
-class Mensager:
+class Messenger:
     def __init__(
             self,
             settings: Settings,
             repository: SupabaseContatoRepository,
-            zapi_client: ZApiClient,
+            zapi_client: ZapiClient,
     ):
         self._settings = settings
         self._repository = repository
@@ -30,8 +30,8 @@ class Mensager:
     
     def executar(self) -> dict:
         """Executa o fluxo completo e retorna um resumo do resultado (sucesso ou falha)"""
-        contatos: List[Contato] = self._repository.listar_contatos(
-            limite=self._setting.max_contatos
+        contatos: List[Contato] = self._repository.get_contatos(
+            limite=self._settings.max_contatos
         )
 
         if not contatos:
@@ -46,7 +46,7 @@ class Mensager:
             try:
                 self._zapi_client.enviar_mensagem(contato.telefone, mensagem)
                 enviados += 1
-            except ZApiError as exc:
+            except ZapiError as exc:
                 logger.error("Erro ao enviar mensagem para %s: %s", contato.nome, exc)
                 falhas += 1
 

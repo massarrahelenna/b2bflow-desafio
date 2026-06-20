@@ -8,7 +8,7 @@ import sys
 from src.config import ConfigError, load_settings
 from src.messenger import Messenger
 from src.supabase_client import SupabaseContatoRepository
-from src.zapi_client import ZApiClient
+from src.zapi_client import ZapiClient
 
 logging.basicConfig(
     level=logging.INFO,
@@ -24,7 +24,7 @@ def main():
         return 1
 
     repository = SupabaseContatoRepository(settings)
-    zapi_client = ZApiClient(settings)
+    zapi_client = ZapiClient(settings)
     messenger = Messenger(settings, repository, zapi_client)
 
     try:
