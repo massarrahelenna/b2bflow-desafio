@@ -8,12 +8,12 @@ from dataclasses import dataclass
 
 load_dotenv()
 
-class Config:
+class ConfigError:
     """erro de configuração do ambiente"""
 def _get_env(name : str) -> str:
     value = os.getenv(name)
     if value is None:
-        raise Config(f"variável de ambiente {name} não encontrada")
+        raise ConfigError(f"variável de ambiente {name} não encontrada")
     return value
 
 @dataclass(frozen=True)
