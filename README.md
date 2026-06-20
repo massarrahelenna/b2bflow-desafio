@@ -99,4 +99,6 @@ $ python3 main.py
 
 ## Autor
 
-Desafio técnico - Estágio em Desenvolvimento Python - b2bflow
+**Helenna Massarra Paes**
+Desafio técnico — Estágio em Desenvolvimento Python (b2bflow)
+[GitHub](https://github.com/massarrahelenna)
